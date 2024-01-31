@@ -32,8 +32,20 @@
         { name: `bbb`, score: 980 },
       ];
 
-      //
       var menus = document.querySelector(`#menus`);
+
+      const highSchores = document.createElement(`div`);
+      highSchores.setAttribute(`id`, `high-scores`);
+
+      menus.appendChild(highSchores);
+
+      highScoreList.forEach((score) => {
+        const scoreDiv = document.createElement(`div`);
+        scoreDiv.appendChild(
+          document.createTextNode(`${score.name}: ${score.score}`)
+        );
+        highSchores.appendChild(scoreDiv);
+      });
     </script>
   </body>
 </html>

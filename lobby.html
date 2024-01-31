@@ -51,6 +51,10 @@
       <section class="blank"></section>
     </main>
     <script src="js/User.js"></script>
-    <script></script>
+    <script>
+        const params = (new URL(document.location)).searchParams;
+        let load = params.get('load');
+        alert(`load=${load}`);
+    </script>
   </body>
 </html>

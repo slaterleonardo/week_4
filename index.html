@@ -48,32 +48,54 @@
 
       var timer = setTimeout(loadStartMenu, 1000);
       function loadStartMenu() {
-        $(`#load`).animate({ opacity: 0 }, 2000, function () {
+        $(`#load`).animate({ opacity: 0 }, 1000, function () {
           menus.removeChild(loadDiv);
           menus.appendChild(startMenu);
-          $(`#start`).animate({ opacity: 1 }, 2000);
+          $(`#start`).animate({ opacity: 1 }, 1000);
         });
       }
 
+      startMenu.style.opacity = `0`;
+
       startButton.addEventListener(`click`, (e) => {
-        const startOptionsDiv = document.createElement(`div`);
-        startOptionsDiv.setAttribute(`id`, `start-options`);
+        $("#start").animate({ opacity: 0 }, 1000, function () {
+          menus.removeChild(startMenu);
 
-        const newGameButton = document.createElement(`button`);
-        newGameButton.setAttribute(`data-load`, `false`);
-        newGameButton.innerText = `New Game`;
+          menus.style.opacity = `0`;
 
-        const continueButton = document.createElement(`button`);
-        continueButton.setAttribute(`data-load`, `true`);
-        continueButton.innerText = `Continue`;
+          const startOptionsDiv = document.createElement(`div`);
+          startOptionsDiv.setAttribute(`id`, `start-options`);
 
-        const highScoresButton = document.createElement(`button`);
-        highScoresButton.innerText = `High Scores`;
+          const newGameButton = document.createElement(`button`);
+          newGameButton.setAttribute(`data-load`, `false`);
+          newGameButton.innerText = `New Game`;
 
-        startOptionsDiv.appendChild(newGameButton);
-        startOptionsDiv.appendChild(continueButton);
-        startOptionsDiv.appendChild(highScoresButton);
-        menus.appendChild(startOptionsDiv);
+          newGameButton.addEventListener(`click`, (e) => {
+            window.location = `lobby.html?load=${e.target.dataset.load}`;
+          });
+
+          const continueButton = document.createElement(`button`);
+          continueButton.setAttribute(`data-load`, `true`);
+          continueButton.innerText = `Continue`;
+
+          continueButton.addEventListener(`click`, (e) => {
+            window.location = `lobby.html?load=${e.target.dataset.load}`;
+          });
+
+          const highScoresButton = document.createElement(`button`);
+          highScoresButton.innerText = `High Scores`;
+
+          highScoresButton.addEventListener(`click`, (e) => {
+            window.location = `hs.html`;
+          });
+
+          startOptionsDiv.appendChild(newGameButton);
+          startOptionsDiv.appendChild(continueButton);
+          startOptionsDiv.appendChild(highScoresButton);
+          menus.appendChild(startOptionsDiv);
+
+          $(`#menus`).animate({ opacity: 1 }, 1000);
+        });
 
         // $(`#start`).animate({ opacity: 0 }, 1000, function () {
         //   window.location = `pong.html`;
